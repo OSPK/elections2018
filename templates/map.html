@@ -3,7 +3,7 @@
 {% block title %}Map - Election Results{% endblock %}
 
 {% block body %}
-    <object  onload="magic()" id="mapObject" type="image/svg+xml" data="/static/pk.svg?14474911" class="map" width="100%" height="100%">
+    <object id="mapObject" type="image/svg+xml" data="/static/pk.svg?14474911" class="map" width="100%" height="100%">
         Pakistan Map
     </object><hr>
     {% if const %}
@@ -32,7 +32,7 @@
 
 {% block scripts %}
 <script>
-function magic() {
+$('#mapObject')[0].addEventListener('load', function() {
     // Get the Object by ID
     var a = document.getElementById("mapObject");
     // Get the SVG document inside the Object tag
@@ -113,10 +113,12 @@ function magic() {
      setInterval(fetchdata,1000);
     });
 
-
     $(".cross").click(function(){
          $(".map-details").hide();
     });
-}
+
+
+
+}, true);
 </script>
 {% endblock %}
