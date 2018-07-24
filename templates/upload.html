@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+
+{% block title %}{{const}} - Update Results{% endblock %}
+
+{% block body %}
+
+{% if const %}
+<h1 class="text-center">{{const}}</h1><hr>
+
+
+    
+    {% for result in results %}
+
+        {% if result.votes is none %}
+            {% set votes = 0%}
+        {% elif result.votes is not none %}
+            {% set votes = result.votes%}
+        {% endif %}
+        <form id="result-{{result.id}}" action="/update/{{result.id}}" method="post" class="row">
+            <div class="row">
+              <div class="form-group col-md-2">{{result.party}}</div>
+              <div class="form-group col-md-4">
+                <label class="control-label" for="candidate">Candidate</label>
+                <input type="text" class="form-control" id="candidate" name="candidate" placeholder="Candidate" value="{{result.candidate}}">
+              </div>
+              <div class="form-group col-md-4">
+                <label class="control-label" for="votes">Votes</label>
+                <input type="text" class="form-control" id="votes" name="votes" placeholder="votes" value="{{votes}}">
+              </div>
+              <div class="checkbox col-md-2">
+                <button type="submit" class="btn btn-default">Update</button>
+              </div>
+            </div>
+        </form>
+        <script>
+            var ttimeout = 500,
+            originalColor = $("#result-{{result.id}}").css("background");
+
+            $(document).ready(function() { 
+                var options = { 
+                    success:       success{{result.id}},  // post-submit callback 
+                    error:         failure{{result.id}}
+                };
+
+                $("#result-{{result.id}}").ajaxForm(options); 
+            }); 
+
+            function success{{result.id}}(responseText, statusText, xhr, $form)  { 
+                $("#result-{{result.id}}").css("background", "green");
+                setTimeout(function(){
+                  $("#result-{{result.id}}").css("background", originalColor);
+                }, ttimeout);
+            } 
+            function failure{{result.id}}(responseText, statusText, xhr, $form)  { 4
+                $("#result-{{result.id}}").css("background", "red");
+                setTimeout(function(){
+                  $("#result-{{result.id}}").css("background", originalColor);
+                }, ttimeout);
+            } 
+        </script>
+
+    {% endfor %}
+
+
+{% endif %}
+<hr>
+
+<div class="row">
+    {% for con in constit %}
+    <div class="col-md-1">
+        <a href="/upload/{{con}}">{{con}}</a>
+    </div>
+    {% endfor %}
+</div><hr>
+
+{% endblock %}
+
+
+{% block scripts %}
+
+{% endblock %}
