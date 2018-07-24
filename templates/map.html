@@ -34,11 +34,11 @@
 <script>
     window.onload=function() {
         // Get the Object by ID
-        var a = document.getElementById("mapObject");
+        var mapObject = document.getElementById("mapObject");
         // Get the SVG document inside the Object tag
-        var svgDoc = a.contentDocument;
-        a.addEventListener("load",function() {
-          svgDoc = a.contentDocument;
+        var svgDoc = mapObject.contentDocument;
+        mapObject.addEventListener("load",function() {
+          svgDoc = mapObject.contentDocument;
         }, false);
         // Get one of the SVG items by ID;
         //var svgItem = svgDoc.getElementById("NA-244");
