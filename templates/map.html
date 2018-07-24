@@ -3,7 +3,7 @@
 {% block title %}Map - Election Results{% endblock %}
 
 {% block body %}
-    <object id="mapObject" type="image/svg+xml" data="/static/pk.svg?14474911" class="map" width="100%" height="100%">
+    <object  onload="magic()" id="mapObject" type="image/svg+xml" data="/static/pk.svg?14474911" class="map" width="100%" height="100%">
         Pakistan Map
     </object><hr>
     {% if const %}
@@ -32,108 +32,91 @@
 
 {% block scripts %}
 <script>
-    window.onload=function() {
-        // Get the Object by ID
-        var object = document.getElementById("mapObject");
-        // Get the SVG document inside the Object tag
-        try {
+function magic() {
+    // Get the Object by ID
+    var a = document.getElementById("mapObject");
+    // Get the SVG document inside the Object tag
+    var svgDoc = a.contentDocument;
+    // Get one of the SVG items by ID;
+    //var svgItem = svgDoc.getElementById("NA-244");
+    var live = svgDoc.getElementById("live");
+    // Set the colour to something else
+    //svgItem.style.fill = "yellow";
+    var con_num = svgDoc.getElementById("con_num");
+    var area = svgDoc.getElementById("area");
+    var winner = svgDoc.getElementById("winner");
+    var dot = svgDoc.getElementById("dot");
 
-          svgDoc = object.contentDocument;
-        } catch(e) {
-          try {
+    con_num.textContent = "";
+    area.textContent = "";
+    winner.textContent = "";
+    dot.style.fill = "white";
 
-             svgDoc = object.getSVGDocument();
-
-           } catch (e) {
-              alert("SVG in object not supported in your environment");
-           }
-        }
-
-        if (!svgDoc) return;
-
-
-
-        // Get one of the SVG items by ID;
-        //var svgItem = svgDoc.getElementById("NA-244");
-        var live = svgDoc.getElementById("live");
-        // Set the colour to something else
-        //svgItem.style.fill = "yellow";
-        var con_num = svgDoc.getElementById("con_num");
-        var area = svgDoc.getElementById("area");
-        var winner = svgDoc.getElementById("winner");
-        var dot = svgDoc.getElementById("dot");
-
-        con_num.textContent = "";
-        area.textContent = "";
-        winner.textContent = "";
-        dot.style.fill = "white";
-
-        setTimeout(function() {
-            setInterval(function() {
-                live.style.fill = "#ff2727";
-            }, 1000);
-        }, 500);
-
+    setTimeout(function() {
         setInterval(function() {
-            live.style.fill = "#cc0000";
+            live.style.fill = "#ff2727";
         }, 1000);
+    }, 500);
 
-        // LIVE DATA
-        function fetchdata(){
-         $.ajax({
-          url: '/colors/',
-          type: 'get',
-          success: function(response){
-           // Perform operation on the return value
-           //console.log(response);
-            let data = JSON.parse(response);
+    setInterval(function() {
+        live.style.fill = "#cc0000";
+    }, 1000);
 
-            jQuery.each(data, function(i, item) {
-                var constituency = data[i].constituency;
-                var consti = svgDoc.getElementById(constituency);
+    // LIVE DATA
+    function fetchdata(){
+     $.ajax({
+      url: '/colors/',
+      type: 'get',
+      success: function(response){
+       // Perform operation on the return value
+       //console.log(response);
+        let data = JSON.parse(response);
 
-                consti.style.fill = data[i].color;
-                consti.cursor = "pointer";
+        jQuery.each(data, function(i, item) {
+            var constituency = data[i].constituency;
+            var consti = svgDoc.getElementById(constituency);
 
-                consti.onmouseenter = function(){
-                    //consti.style.opacity=0.6;
-                    consti.style.stroke=data[i].color;
-                    con_num.textContent = constituency;
-                    area.textContent = data[i].area;
-                    dot.style.fill = data[i].color;
-                    winner.textContent = data[i].candidate +" ("+data[i].party+")";
-                    
-                };
-                consti.onmouseout = function(){
-                    consti.style.opacity=1;
-                    consti.style.stroke="none";
-                    con_num.textContent = "";
-                    area.textContent = "";
-                    dot.style.fill = "white";
-                    winner.textContent = "";
-                };
-                consti.onclick = function () {
-                    window.location.href = '/map/'+constituency;
-                    con_num.textContent = constituency;
-                };
-            })
+            consti.style.fill = data[i].color;
+            consti.cursor = "pointer";
 
-
-          }
-         });
-        }
-
-        fetchdata();
-
-        $(document).ready(function(){
-         setInterval(fetchdata,1000);
-        });
+            consti.onmouseenter = function(){
+                //consti.style.opacity=0.6;
+                consti.style.stroke=data[i].color;
+                con_num.textContent = constituency;
+                area.textContent = data[i].area;
+                dot.style.fill = data[i].color;
+                winner.textContent = data[i].candidate +" ("+data[i].party+")";
+                
+            };
+            consti.onmouseout = function(){
+                consti.style.opacity=1;
+                consti.style.stroke="none";
+                con_num.textContent = "";
+                area.textContent = "";
+                dot.style.fill = "white";
+                winner.textContent = "";
+            };
+            consti.onclick = function () {
+                window.location.href = '/map/'+constituency;
+                con_num.textContent = constituency;
+            };
+        })
 
 
-        $(".cross").click(function(){
-             $(".map-details").hide();
-        });
+      }
+     });
+    }
 
-    };
+    fetchdata();
+
+    $(document).ready(function(){
+     setInterval(fetchdata,1000);
+    });
+
+
+    $(".cross").click(function(){
+         $(".map-details").hide();
+    });
+}
 </script>
 {% endblock %}
