@@ -3,12 +3,14 @@
 {% block title %}{{const}} - Update Results{% endblock %}
 
 {% block body %}
-
+    <div class="row">
+        <a class="pull-right" href="/logout">
+            <button class="btn btn-small btn-fluid">Logout</button>
+        </a>
+    </div>
 {% if const %}
-<h1 class="text-center">{{const}}</h1><hr>
+    <h1 class="text-center">{{const}}</h1><hr>
 
-
-    
     {% for result in results %}
 
         {% if result.votes is none %}
@@ -71,8 +73,7 @@
         <a href="/upload/{{con}}">{{con}}</a>
     </div>
     {% endfor %}
-</div><hr>
-
+</div>
 {% endblock %}
 
 

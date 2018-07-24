@@ -52,7 +52,7 @@ def login_required(f):
     @wraps(f)
     def wrap(*args, **kwargs):
         if not session.get('logged_in'):
-            return redirect(url_for('login'))
+            return redirect(url_for('login')), 401
         return f(*args, **kwargs)
 
     return wrap
