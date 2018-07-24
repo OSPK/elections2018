@@ -52,14 +52,14 @@ def login_required(f):
     @wraps(f)
     def wrap(*args, **kwargs):
         if not session.get('logged_in'):
-            return render_template('login.html')
+            return redirect(url_for('login'))
         return f(*args, **kwargs)
 
     return wrap
 # /Functions ============================================================
 
 @app.route('/login/', methods=['GET','POST'])
-def login_page():
+def login():
     if request.method == 'POST':
         if request.form['password'] == pwd and request.form['username'] == username:
             session['logged_in'] = True
@@ -72,16 +72,11 @@ def login_page():
 @app.route("/logout/")
 def logout():
     session['logged_in'] = False
-    return render_template('login.html')
-
-
-@app.route('/up-load/')
-def uup():
-    session['logged_in'] = False
-    return redirect(url_for('upload'))
+    return redirect(url_for('login'))
 
 @app.route('/upload/')
 @app.route('/upload/<const>')
+@login_required
 def upload(const=False):
     if const:
         results = Result.query.filter_by(constituency=const).order_by(Result.votes.desc()).all()
