@@ -34,12 +34,25 @@
 <script>
     window.onload=function() {
         // Get the Object by ID
-        var mapObject = document.getElementById("mapObject");
+        var object = document.getElementById("mapObject");
         // Get the SVG document inside the Object tag
-        var svgDoc = mapObject.contentDocument;
-        mapObject.addEventListener("load",function() {
-          svgDoc = mapObject.contentDocument;
-        }, false);
+        try {
+
+          svgDoc = object.contentDocument;
+        } catch(e) {
+          try {
+
+             svgDoc = object.getSVGDocument();
+
+           } catch (e) {
+              alert("SVG in object not supported in your environment");
+           }
+        }
+
+        if (!svgDoc) return;
+
+
+
         // Get one of the SVG items by ID;
         //var svgItem = svgDoc.getElementById("NA-244");
         var live = svgDoc.getElementById("live");
