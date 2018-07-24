@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}Login{% endblock %}
+
+{% block body %}
+<form class="form-login" method="POST" action="/login/">
+    <h4>LOG IN</h4>
+    <input type="text" name="username" id="userName" class="form-control input-sm chat-input" placeholder="username" />
+    </br>
+    <input type="text" name="password" id="userPassword" class="form-control input-sm chat-input" placeholder="password" />
+    </br>
+    <button type="submit">LOG In</button>
+</form>
+
+
+{% endblock %}
+
+
+{% block scripts %}
+
+{% endblock %}

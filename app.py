@@ -1,20 +1,18 @@
 from flask import Flask, render_template, request,\
-                redirect, url_for
+                redirect, url_for, session, flash
 from flask_sqlalchemy import SQLAlchemy
 import simplejson as json
 from collections import OrderedDict
-from flask_simplelogin import SimpleLogin
-from flask_simplelogin import login_required
+from functools import wraps
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'something-secret'
-app.config['SIMPLELOGIN_USERNAME'] = 'dp'
-app.config['SIMPLELOGIN_PASSWORD'] = 'pakistan'
+username = 'dp'
+pwd = 'pakistan'
 
 app.config['SQLALCHEMY_DATABASE_URI'] = "mysql://root:x3nonx4@localhost/elections"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
-SimpleLogin(app)
 
 class Result(db.Model):
     __tablename__="results"
@@ -49,11 +47,32 @@ def alchemyencoder(obj):
         return obj.isoformat()
     elif isinstance(obj, decimal.Decimal):
         return float(obj)
+
+def login_required(f):
+    @wraps(f)
+    def wrap(*args, **kwargs):
+        if not session.get('logged_in'):
+            return redirect(url_for('login_page'))
+        return f(*args, **kwargs)
+
+    return wrap
 # /Functions ============================================================
 
-# @app.route('/')
-# def home():
-#     return 'Hello, World!'
+@app.route('/login/', methods=['GET','POST'])
+def login_page():
+    if request.method == 'POST':
+        if request.form['password'] == pwd and request.form['username'] == username:
+            session['logged_in'] = True
+        else:
+            flash('wrong password!')
+        return redirect(url_for('upload'))
+    if request.method == 'GET':
+        return render_template('login.html')
+
+@app.route("/logout/")
+def logout():
+    session['logged_in'] = False
+    return redirect(url_for('login_page'))
 
 @app.route('/upload/')
 @app.route('/upload/<const>')
