@@ -52,7 +52,7 @@ def login_required(f):
     @wraps(f)
     def wrap(*args, **kwargs):
         if not session.get('logged_in'):
-            return redirect('/login')
+            return redirect('https://elections.dailypakistan.com.pk/login')
         return f(*args, **kwargs)
 
     return wrap
