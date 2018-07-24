@@ -77,7 +77,6 @@ def logout():
 @app.route('/upload/')
 @app.route('/up-load/')
 @app.route('/upload/<const>')
-@login_required
 def upload(const=False):
     if const:
         results = Result.query.filter_by(constituency=const).order_by(Result.votes.desc()).all()
