@@ -111,7 +111,7 @@ def colors():
     final = []
     for result in results:
 
-        if result.votes is None:
+        if result.votes is None or result.votes is 0:
             continue
 
         if result.party not in party_colors:
