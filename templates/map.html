@@ -1664,12 +1664,6 @@
 <script>
 
  window.onload = function(){
-   setTimeout(magic, 1000)
-};
-
-function magic() {
-    console.log("fone");
-
 
     // Get the Object by ID
     var svgDoc = document.getElementById("svg2");
@@ -1748,13 +1742,13 @@ function magic() {
     fetchdata();
 
     $(document).ready(function(){
-     setInterval(fetchdata,1000);
+     setInterval(fetchdata,15000);
     });
 
     $(".cross").click(function(){
          $(".map-details").hide();
     });
 
-}
+};
 </script>
 {% endblock %}
