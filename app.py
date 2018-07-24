@@ -74,8 +74,13 @@ def logout():
     session['logged_in'] = False
     return render_template('login.html')
 
-@app.route('/upload/')
+
 @app.route('/up-load/')
+def uup():
+    session['logged_in'] = False
+    return redirect(url_for('upload'))
+
+@app.route('/upload/')
 @app.route('/upload/<const>')
 def upload(const=False):
     if const:
