@@ -31,7 +31,18 @@
 
 {% block scripts %}
 <script>
-$('#mapObject')[0].addEventListener('load', function() {
+
+window.addEventListener("load", function () {
+    magic();
+    setTimeout(otherOperation, 5000);
+}, false);
+
+function otherOperation() {}
+    
+function magic() {
+    console.log("fone");
+
+
     // Get the Object by ID
     var a = document.getElementById("mapObject");
     // Get the SVG document inside the Object tag
@@ -116,8 +127,6 @@ $('#mapObject')[0].addEventListener('load', function() {
          $(".map-details").hide();
     });
 
-
-
-}, true);
+}
 </script>
 {% endblock %}
