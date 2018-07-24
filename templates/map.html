@@ -3,7 +3,7 @@
 {% block title %}Map - Election Results{% endblock %}
 
 {% block body %}
-    <object id="mapObject" type="image/svg+xml" data="/static/pk.svg?174911" class="map" width="100%" height="100%">
+    <object id="mapObject" type="image/svg+xml" data="/static/pk.svg?14474911" class="map" width="100%" height="100%">
         Pakistan Map
     </object><hr>
     {% if const %}
@@ -37,6 +37,9 @@
         var a = document.getElementById("mapObject");
         // Get the SVG document inside the Object tag
         var svgDoc = a.contentDocument;
+        a.addEventListener("load",function() {
+          svgDoc = a.contentDocument;
+        }, false);
         // Get one of the SVG items by ID;
         //var svgItem = svgDoc.getElementById("NA-244");
         var live = svgDoc.getElementById("live");
