@@ -72,9 +72,10 @@ def login_page():
 @app.route("/logout/")
 def logout():
     session['logged_in'] = False
-    return redirect(url_for('login_page'))
+    return render_template('login.html')
 
 @app.route('/upload/')
+@app.route('/up-load/')
 @app.route('/upload/<const>')
 @login_required
 def upload(const=False):
