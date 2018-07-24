@@ -3,7 +3,7 @@
 {% block title %}Map - Election Results{% endblock %}
 
 {% block body %}
-    <object id="mapObject" type="image/svg+xml" data="/static/pk.svg?74911" class="map" width="100%" height="100%">
+    <object id="mapObject" type="image/svg+xml" data="/static/pk.svg?174911" class="map" width="100%" height="100%">
         Pakistan Map
     </object><hr>
     {% if const %}
@@ -39,7 +39,7 @@
         var svgDoc = a.contentDocument;
         // Get one of the SVG items by ID;
         //var svgItem = svgDoc.getElementById("NA-244");
-        var live = svgDoc.getElementById("tspan5317");
+        var live = svgDoc.getElementById("live");
         // Set the colour to something else
         //svgItem.style.fill = "yellow";
         var con_num = svgDoc.getElementById("con_num");
