@@ -93,6 +93,7 @@ def update(id):
     result = Result.query.get(id)
     result.candidate = data['candidate']
     result.votes = data['votes']
+    result.party = data['party']
     db.session.commit()
     return redirect(url_for('upload', const=result.constituency))
 

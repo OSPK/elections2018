@@ -20,7 +20,10 @@
         {% endif %}
         <form id="result-{{result.id}}" action="/update/{{result.id}}" method="post" class="row">
             <div class="row">
-              <div class="form-group col-md-2">{{result.party}}</div>
+              <div class="form-group col-md-2">
+                <label class="control-label" for="party">Party</label>
+                <input type="text" class="form-control" id="party" name="party" value="{{result.party}}">
+              </div>
               <div class="form-group col-md-4">
                 <label class="control-label" for="candidate">Candidate</label>
                 <input type="text" class="form-control" id="candidate" name="candidate" placeholder="Candidate" value="{{result.candidate}}">
