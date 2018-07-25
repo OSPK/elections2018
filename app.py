@@ -139,4 +139,4 @@ def map(const=None):
     results = {}
     if const is not None:
         results = Result.query.filter_by(constituency=const).order_by(Result.votes.desc()).limit(5).all()
-    return render_template('map.html', results=results, const=const)
+    return render_template('map.html', results=results, const=const, constit=constit)

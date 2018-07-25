@@ -1635,7 +1635,7 @@
            y="344.30768">◼</tspan></text>
     </svg>
 
-    <hr>
+    
     {% if const %}
     <div class="map-details">
         <div class="cross">X</div>
@@ -1651,11 +1651,35 @@
                     <div class="col-md-3">{{item.candidate}}</div>
                     <div class="col-md-3">{{item.party}}</div>
                     <div class="col-md-3">{{item.votes}}</div>
-                </div><br><br>
+                </div><br>
             {% endfor %}
-        </div>
+        </div><br>
     </div>
     {% endif %}
+
+    <!-- Button HTML (to Trigger Modal) -->
+    <a href="#myModal" role="button" class="btn btn-lg btn-large btn-block btn-default" data-toggle="modal">Click for Detailed Constituency Results</a>
+    <hr>
+ 
+    <!-- Modal HTML -->
+    <div id="myModal" class="modal fade">
+        <div class="modal-dialogd">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        {% for cc in constit %}
+                            <div class="col-md-1 col-sm-2 col-xs-4" >
+                                <a href="/map/{{cc}}">{{cc}}</a>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 {% endblock %}
 
