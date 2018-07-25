@@ -1757,7 +1757,9 @@
                 window.location.href = '/map/'+constituency;
                 con_num.textContent = constituency;
             };
-        })
+        });
+
+        ga('send', 'event', 'data', 'fetch', 'Data Refresh');
 
 
       }
