@@ -1637,28 +1637,49 @@
 
     
     {% if const %}
-    <div class="map-details">
-        <div class="cross">X</div>
-        <h1 class="text-center">{{const}}</h1>
-        <div class="container">
-                <div class="row text-center">
-                    <div class="col-xs-3 bold">Candidate</div>
-                    <div class="col-xs-3 bold">Party</div>
-                    <div class="col-xs-3 bold">Votes</div>
-                </div><br>
-            {% for item in results %}
-                <div class="row text-center">
-                    <div class="col-xs-3">{{item.candidate}}</div>
-                    <div class="col-xs-3">{{item.party}}</div>
-                    <div class="col-xs-3">{{item.votes}}</div>
-                </div><br>
-            {% endfor %}
-        </div><br>
+    <div id="detmodal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+                <h1 class="text-center">{{const}}</h1>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                  <tr>
+                                    <th>Candidate</th>
+                                    <th>Party</th>
+                                    <th>Votes</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                    {% for item in results %}
+                                    <tr>
+                                        <td>{{item.candidate}}</td>
+                                        <td>{{item.party}}</td>
+                                        <td>{{item.votes}}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div><br>
+                </div>
+            </div>
+        </div>
     </div>
+    <script type="text/javascript">
+        $(window).on('load',function(){
+            $('#detmodal').modal('show');
+        });
+    </script>
     {% endif %}
 
     <!-- Button HTML (to Trigger Modal) -->
-    <a href="#myModal" role="button" class="btn btn-lg btn-large btn-block btn-default" data-toggle="modal">Click for Detailed Constituency Results</a>
+    <a href="#myModal" role="button" class="btn btn-lg btn-block btn-default" data-toggle="modal">Click for Detailed Constituency Results</a>
  
     <!-- Modal HTML -->
     <div id="myModal" class="modal fade">
