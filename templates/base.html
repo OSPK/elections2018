@@ -32,6 +32,12 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
         <script src="{{url_for('static', filename='jquery.form.js')}}"></script>
         <style>
+            body {
+              -webkit-user-select: none;
+                 -moz-user-select: -moz-none;
+                  -ms-user-select: none;
+                      user-select: none;
+            }
             .map-details {
                 position:fixed;
                 left:50%;
