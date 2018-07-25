@@ -144,7 +144,7 @@ def map(const=None):
 
 @app.route('/pp/')
 def pp():
-    parties = {'PTI':0, 'PMLN':0, 'PPP':0, 'MQM':0, 'MMA':0, 'ANP':0}
+    parties = {'PTI':0, 'PMLN':0, 'PPP':0, 'MQM':0, 'MMA':0, 'IND':0}
 
     results = []
     for const in constit:
