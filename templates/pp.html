@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}Map - Election Results{% endblock %}
+
+{% block body %}
+
+    <div class="row text-center">
+        <h3 class="bold">Party Position - National Assembly</h3><hr>
+        {% for party, num in parties.items() | sort(reverse = True)  %}
+            <div class="col-md-2 col-sm-2 col-xs-2">
+                <h5 class="bold">{{party}}</h5>
+                <h3 class="bold">{{num}}</h3>
+            </div>
+        {% endfor %}
+    </div><hr>
+
+{% endblock %}
+
+
+{% block scripts %}
+
+{% endblock %}

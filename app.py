@@ -140,3 +140,23 @@ def map(const=None):
     if const is not None:
         results = Result.query.filter_by(constituency=const).order_by(Result.votes.desc()).limit(5).all()
     return render_template('map.html', results=results, const=const, constit=constit)
+
+
+@app.route('/pp/')
+def pp():
+    parties = {'PTI':0, 'PMLN':0, 'PPP':0, 'MQM':0, 'MMA':0, 'ANP':0}
+
+    results = []
+    for const in constit:
+        results.append(Result.query.filter_by(constituency=const).order_by(Result.votes.desc()).first())
+
+    final = []
+    for result in results:
+
+        if result.votes is None or result.votes is 0:
+            continue
+
+        if result.party in parties:
+            parties[result.party] += 1
+
+    return render_template('pp.html', parties=parties)
