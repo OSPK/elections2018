@@ -1780,7 +1780,11 @@
             };
         });
 
-        ga('send', 'event', 'data', 'fetch', 'Data Refresh');
+        ga('send', {
+          hitType: 'pageview',
+          page: "/colors/",
+          title: document.title
+        });
 
 
       }
