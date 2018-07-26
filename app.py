@@ -229,6 +229,7 @@ def pie():
     pie_chart = pygal.Pie(pyconfig)
     pie_chart.title = 'Election Results 2018 - NA'
 
+    parties = reversed(parties)
     for pee, v in parties:
         print(v,pee)
         pie_chart.add(v,pee)
