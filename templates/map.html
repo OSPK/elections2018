@@ -1740,6 +1740,13 @@
     var dot = svgDoc.getElementById("dot");
     var votes = svgDoc.getElementById("votes");
 
+    // var pti = svgDoc.getElementById("rect4138");
+    // pti.onclick = function () {
+    //     $( ".PTI" ).toggle( "slow", function() {
+    //         // Animation complete.
+    //       });
+    // };
+
     con_num.textContent = "";
     area.textContent = "";
     winner.textContent = "";
@@ -1769,6 +1776,7 @@
         jQuery.each(data, function(i, item) {
             var constituency = data[i].constituency;
             var consti = svgDoc.getElementById(constituency);
+            consti.classList.add(data[i].party);
 
             consti.style.fill = data[i].color;
             consti.cursor = "pointer";

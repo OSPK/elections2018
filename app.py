@@ -5,6 +5,7 @@ import simplejson as json
 from collections import OrderedDict
 from functools import wraps
 import pygal
+from sqlalchemy.sql import func
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'something-secret'
@@ -66,7 +67,17 @@ def login_required(f):
 
     return wrap
 
-app.jinja_env.globals.update(get_color=get_color)
+def total():
+    qry = db.session.query(func.max(Result.votes).label("max_score"), 
+                    func.sum(Result.votes).label("total_score"),
+                    )
+    # qry = qry.group_by(Result.constituency)
+    for highest, total in qry:
+        total = {"highest":highest, "total":total}
+
+    return total
+
+app.jinja_env.globals.update(get_color=get_color, total=total)
 # /Functions ============================================================
 
 @app.route('/login/', methods=['GET','POST'])
