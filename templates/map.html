@@ -23,7 +23,7 @@
        fill="#7c7c7c"
        baseprofile="tiny"
        inkscape:version="0.91 r13725"
-       sodipodi:docname="pk.svg">
+       sodipodi:docname="svg2.svg">
       <sodipodi:namedview
          pagecolor="#ffffff"
          bordercolor="#666666"
@@ -38,8 +38,8 @@
          id="namedview4671"
          showgrid="false"
          inkscape:zoom="0.78"
-         inkscape:cx="445.19557"
-         inkscape:cy="416.56236"
+         inkscape:cx="426.60583"
+         inkscape:cy="457.588"
          inkscape:window-x="12"
          inkscape:window-y="48"
          inkscape:window-maximized="0"
@@ -52,7 +52,7 @@
             <dc:format>image/svg+xml</dc:format>
             <dc:type
                rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-            <dc:title />
+            <dc:title></dc:title>
           </cc:Work>
         </rdf:RDF>
       </metadata>
@@ -1633,7 +1633,19 @@
            id="tspan4508"
            x="41.128212"
            y="344.30768">◼</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-weight:bold;font-size:17.5px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#333333;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         x="69.948723"
+         y="371.53845"
+         id="text5068"
+         sodipodi:linespacing="125%"><tspan
+           sodipodi:role="line"
+           id="votes"
+           x="69.948723"
+           y="371.53845">votes</tspan></text>
     </svg>
+
 
     
     {% if const %}
@@ -1726,10 +1738,12 @@
     var area = svgDoc.getElementById("area");
     var winner = svgDoc.getElementById("winner");
     var dot = svgDoc.getElementById("dot");
+    var votes = svgDoc.getElementById("votes");
 
     con_num.textContent = "";
     area.textContent = "";
     winner.textContent = "";
+    votes.textContent = "";
     dot.style.fill = "white";
 
     setTimeout(function() {
@@ -1766,6 +1780,8 @@
                 area.textContent = data[i].area;
                 dot.style.fill = data[i].color;
                 winner.textContent = data[i].candidate +" ("+data[i].party+")";
+                votes.textContent = data[i].votes + " votes";
+
                 
             };
             consti.onmouseout = function(){
@@ -1775,6 +1791,7 @@
                 area.textContent = "";
                 dot.style.fill = "white";
                 winner.textContent = "";
+                votes.textContent = "";
             };
             consti.onclick = function () {
                 window.location.href = '/map/'+constituency;
