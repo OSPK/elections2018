@@ -40,7 +40,13 @@ constit = ["NA-1","NA-2","NA-3","NA-4","NA-5","NA-6","NA-7","NA-8","NA-9","NA-10
 party_colors = {"PMLN":"#73d216", "PTI":"#ef2929", "PPP":"#5c3566", "MQM":"#000000",\
                 "MMA":"#e9b96e", "PKMAP":"#f57900", "ANP":"#edd400", "PSP":"#0aa7f2",\
                 "TLP":"#356c2f","BAP":"#8f5902", "IND":"#888a85"}
+
 # Functions ============================================================
+def get_color(party):
+    if not party_colors.get(party):
+        return "#666666"
+    return party_colors.get(party)
+
 def alchemyencoder(obj):
     """JSON encoder function for SQLAlchemy special classes."""
     if isinstance(obj, datetime.date):
@@ -56,6 +62,8 @@ def login_required(f):
         return f(*args, **kwargs)
 
     return wrap
+
+app.jinja_env.globals.update(get_color=get_color)
 # /Functions ============================================================
 
 @app.route('/login/', methods=['GET','POST'])
@@ -162,9 +170,9 @@ def pp():
         parties[result.party] += 1
 
     total = sum(parties.values())
-    
+
     parties = sorted((value, key) for (key,value) in parties.items())
 
     print(total, parties)
 
-    return render_template('pp.html', parties=parties)
+    return render_template('pp.html', parties=parties, total=total)
