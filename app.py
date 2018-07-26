@@ -139,8 +139,23 @@ def colors():
 @app.route("/circle")
 def circle():
     cir = ""
+    cx = 0
+    cy = 0
+    count=0
     for na in constit:
-        tmpcir = '<circle r="4.4400001" id="{}" style="fill:#006600;fill-opacity:1" />'.format(na)
+        tmpcir = """<circle
+        style="opacity:1;fill:#ff2727;fill-opacity:1;stroke:none;stroke-width:3;stroke-miterlimit:4;stroke-dasharray:none"
+        id="{}"
+        cx="{}"
+        cy="{}"
+        r="10" />""".format(na,cx,cy)
+
+        cx += 20
+        count += 1
+        if count == 13:
+            cy += 20
+            count = 0
+
         cir = cir + tmpcir
     return cir
 
@@ -151,6 +166,15 @@ def map(const=None):
     if const is not None:
         results = Result.query.filter_by(constituency=const).order_by(Result.votes.desc()).limit(5).all()
     return render_template('map.html', results=results, const=const, constit=constit)
+
+
+@app.route('/chart')
+@app.route('/chart/<const>')
+def chart(const=None):
+    results = {}
+    if const is not None:
+        results = Result.query.filter_by(constituency=const).order_by(Result.votes.desc()).limit(5).all()
+    return render_template('chart.html', results=results, const=const, constit=constit)
 
 
 @app.route('/pp/')
