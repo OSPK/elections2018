@@ -4,6 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 import simplejson as json
 from collections import OrderedDict
 from functools import wraps
+import pygal
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'something-secret'
@@ -199,6 +200,40 @@ def pp():
 
     parties = sorted((value, key) for (key,value) in parties.items())
 
-    print(total, parties)
-
     return render_template('pp.html', parties=parties, total=total)
+
+
+@app.route('/pie/')
+def pie():
+    parties = {}
+
+    results = []
+    for const in constit:
+        results.append(Result.query.filter_by(constituency=const).order_by(Result.votes.desc()).first())
+
+    final = []
+    for result in results:
+
+        if result.votes is None or result.votes is 0:
+            continue
+
+        if not parties.get(result.party):
+            parties[result.party] = 0
+        parties[result.party] += 1
+
+    total = sum(parties.values())
+
+    parties = sorted((value, key) for (key,value) in parties.items())
+    pyconfig = pygal.Config()
+    pyconfig.js = ['https://en.dailypakistan.com.pk/wp-content/themes/century/js/pygal-tooltips.min.js']
+    pie_chart = pygal.Pie(pyconfig)
+    pie_chart.title = 'Election Results 2018 - NA'
+
+    for pee, v in parties:
+        print(v,pee)
+        pie_chart.add(v,pee)
+
+    chart = pie_chart.render().decode('UTF-8')
+
+
+    return render_template('pie.html', chart=chart)
