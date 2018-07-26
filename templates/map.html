@@ -1711,6 +1711,8 @@
 
  window.onload = function(){
 
+ $("#svg2").css("max-height", screen.height-60+"px");
+
     // Get the Object by ID
     var svgDoc = document.getElementById("svg2");
     // Get the SVG document inside the Object tag
@@ -1800,6 +1802,7 @@
     $(".cross").click(function(){
          $(".map-details").hide();
     });
+
 
 };
 </script>
