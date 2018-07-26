@@ -41,7 +41,7 @@ party_colors = {"PMLN":"#73d216", "PTI":"#ef2929", "PPP":"#5c3566", "MQM":"#0000
                 "MMA":"#e9b96e", "PKMAP":"#f57900", "ANP":"#edd400", "PSP":"#0aa7f2",\
                 "TLP":"#356c2f","BAP":"#8f5902", "IND":"#888a85", "GDA": "#af24b3",\
                 "PML-Q":"#1a27e3", "BNP":"#83a18f", "QWP":"#cdd004", "PAR":"#f55ba2",\
-                "AML":"#f55ba2"}
+                "AML":"#4ad067"}
 
 # Functions ============================================================
 def get_color(party):
