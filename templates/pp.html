@@ -11,7 +11,7 @@
     <div class="row text-center">
         <h3 class="bold">Party Position - National Assembly</h3><hr>
         {% for num, party in parties | sort(reverse = True)  %}
-            <div class="col-md-2 col-sm-4 col-xs-6" style="border:2px solid {{get_color(party)}};border-bottom:9px solid {{get_color(party)}};">
+            <div class="col-md-2 col-sm-3 col-xs-4" style="border:2px solid {{get_color(party)}};border-bottom:9px solid {{get_color(party)}};">
                 
                 <div class="col-md-6">
                     <h3 class="bold">{{party | replace('-Q','')}}</h3>
@@ -21,7 +21,7 @@
                 </div>
             </div>
         {% endfor %}
-            <div class="col-md-2 col-sm-4 col-xs-6" style="border:2px solid #016f3a;border-bottom:9px solid #016f3a;">
+            <div class="col-md-2 col-sm-3 col-xs-4" style="border:2px solid #016f3a;border-bottom:9px solid #016f3a;">
                 
                 <div class="col-md-6">
                     <h3 class="bold">Total</h3>
