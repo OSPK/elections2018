@@ -233,7 +233,7 @@ def pie():
         print(v,pee)
         pie_chart.add(v,pee)
 
-    chart = pie_chart.render().decode('UTF-8')
+    chart = pie_chart.render_data_uri()
 
 
     return render_template('pie.html', chart=chart)

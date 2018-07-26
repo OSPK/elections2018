@@ -9,7 +9,7 @@
 {% block body %}
 
     <div class="row text-center">
-        {{chart | safe}}
+        <embed type="image/svg+xml" src= {{ chart|safe }} />
     </div><hr>
 
 {% endblock %}
