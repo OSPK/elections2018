@@ -145,7 +145,7 @@ def map(const=None):
 
 @app.route('/pp/')
 def pp():
-    parties = {'PTI':0, 'PMLN':0, 'PPP':0, 'MQM':0, 'MMA':0, 'IND':0}
+    parties = {}
 
     results = []
     for const in constit:
@@ -157,7 +157,14 @@ def pp():
         if result.votes is None or result.votes is 0:
             continue
 
-        if result.party in parties:
-            parties[result.party] += 1
+        if not parties.get(result.party):
+            parties[result.party] = 0
+        parties[result.party] += 1
+
+    total = sum(parties.values())
+    
+    parties = sorted((value, key) for (key,value) in parties.items())
+
+    print(total, parties)
 
     return render_template('pp.html', parties=parties)
