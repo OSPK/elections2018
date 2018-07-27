@@ -176,7 +176,7 @@ def circle():
 def map(const=None):
     results = {}
     if const is not None:
-        results = Result.query.filter_by(constituency=const).order_by(Result.votes.desc()).limit(5).all()
+        results = Result.query.filter_by(constituency=const).order_by(Result.votes.desc()).limit(7).all()
     return render_template('map.html', results=results, const=const, constit=constit)
 
 
@@ -185,7 +185,7 @@ def map(const=None):
 def chart(const=None):
     results = {}
     if const is not None:
-        results = Result.query.filter_by(constituency=const).order_by(Result.votes.desc()).limit(5).all()
+        results = Result.query.filter_by(constituency=const).order_by(Result.votes.desc()).limit(7).all()
     return render_template('chart.html', results=results, const=const, constit=constit)
 
 
