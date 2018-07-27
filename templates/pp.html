@@ -9,7 +9,7 @@
 {% block body %}
 
     <div class="row text-center">
-        <h3 class="bold">Party Position - National Assembly</h3><hr>
+        <h3 class="bold">Party Position - National Assembly</h3>
         {% for num, party in parties | sort(reverse = True)  %}
             <div class="col-md-2 col-sm-3 col-xs-4" style="border:2px solid {{get_color(party)}};border-bottom:9px solid {{get_color(party)}};">
                 
@@ -30,7 +30,7 @@
                     <h4 class="bold">{{total}}</h4>
                 </div>
             </div>
-    </div><hr>
+    </div>
 
 {% endblock %}
 
